@@ -33,6 +33,6 @@ mysql> show columns in mesurements;
 +----------------+-------------+------+-----+---------+----------------+
 5 rows in set (0.00 sec)
 
-sript 'ser.py' sends a char to comm and receive ansver from device 
+sсript 'ser.py' sends a char to comm and receive ansver from device 
 
 'ard.ino' is a source code for device

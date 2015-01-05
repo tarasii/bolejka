@@ -4,7 +4,7 @@
 import mysql.connector
 import datetime
 import serial
-
+from time import sleep
 
 def getserial():
   res = "0";
@@ -12,6 +12,8 @@ def getserial():
   try:
     ser.open()
     if (ser.isOpen()):
+      ser.write("a")
+      sleep(0.1)
       line = ser.readline()
       ser.close()
 
@@ -25,7 +27,7 @@ def writetable(val):
   try:
     conn = mysql.connector.connect(host="localhost", 
                      user="root", 
-                      passwd="aceofbase")  
+                      passwd="")  
   except:
     print ("Error connection")
     return

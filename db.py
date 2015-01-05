@@ -7,7 +7,7 @@ def createtables():
   try:
     conn = mysql.connector.connect(host="localhost", 
                      user="root", 
-                      passwd="aceofbase")  
+                      passwd="")  
   except:
     print ("Error connection")
     return

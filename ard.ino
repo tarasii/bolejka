@@ -9,12 +9,12 @@ void setup()
 {  
   Serial.begin(9600);
   
-  //emon1.current(1, 111.1);             // Current: input pin, calibration.
+  emon1.current(1, 111.1);             // Current: input pin, calibration.
 }
 
 void loop()
 {
-  //double Irms = emon1.calcIrms(1480);  // Calculate Irms only
+  double Irms = emon1.calcIrms(1480);  // Calculate Irms only
   
   //Serial.print(Irms*230.0);	       // Apparent power
   //Serial.print(" ");
@@ -23,19 +23,7 @@ void loop()
     // read the incoming byte:
     incomingByte = Serial.read();
     
-    //Serial.println(Irms);		       // Irms
-    
-    val = analogRead(0);     // считываем значение
-    Serial.print("A0=");
-    Serial.println(val);             // выводим полученное значение
-    
-    val = analogRead(1);     // считываем значение
-    Serial.print("A1=");
-    Serial.println(val);             // выводим полученное значение
-    
-    val = analogRead(2);     // считываем значение
-    Serial.print("A2=");
-    Serial.println(val);             // выводим полученное значение
+    Serial.println(Irms);		       // Irms
     
   }
 }

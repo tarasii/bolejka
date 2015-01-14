@@ -39,8 +39,8 @@ def writetable(val):
   try:
     c.execute('USE bolejka;') 
     c.execute('INSERT INTO mesurements (mesuredatetime, sensorid, value) VALUES ("'+curdate+'",1,'+str(val)+');')
-    //c.execute('SELECT * FROM mesurements;')
-    //print c.fetchall()
+    #c.execute('SELECT * FROM mesurements;')
+    #print c.fetchall()
   
   except:
     print ("Error command")

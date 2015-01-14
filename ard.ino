@@ -25,7 +25,16 @@ void loop()
     
     //Serial.println(Irms);		       // Irms
     
+    val = analogRead(0);     // считываем значение
+    Serial.print("А0=");
+    Serial.println(val);             // выводим полученное значение
+    
     val = analogRead(1);     // считываем значение
+    Serial.print("А1=");
+    Serial.println(val);             // выводим полученное значение
+    
+    val = analogRead(2);     // считываем значение
+    Serial.print("А2=");
     Serial.println(val);             // выводим полученное значение
     
   }

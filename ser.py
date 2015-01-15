@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-
+import requests
 import mysql.connector
 import datetime
 import serial
@@ -35,6 +35,8 @@ def writetable(val):
   c = conn.cursor()
 
   curdate = str(datetime.datetime.now())
+
+  r = requests.post("http://emoncms.org/input/post?json={power:"+str(val)+"}&apikey=7ac88045c3f843febe32d0d75d7b8a72")
 
   try:
     c.execute('USE bolejka;') 

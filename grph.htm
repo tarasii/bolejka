@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Current statistics</title>
+		
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<link type="text/css" href="js/jquery-ui/development-bundle/themes/base/jquery.ui.all.css" rel="stylesheet" />
+  		
+   	<script type="text/javascript" src="js/localhost.js"></script>
+ 
+
+		<script type="text/javascript">
+			var cnt = 0, date, addr,
+				seriesOptions = [], 
+				names = ['CURRENT1','CURRENT2']
+				modestr = ['0'];
+
+			date = new Date();
+	
+			date2 = new Date(1357533244000);
+			date.setDate(date.getDate() - 60);
+			if (date2.getTime() > date.getTime()) 
+			{
+			    date.setTime(date2.getTime());
+			}
+			modestr[0] = '1&from='+DateToSQL(date);
+			//modestr[1] = '2&from='+DateToSQL(date);
+			
+	
+
+			createAll();
+
+			$(function (){
+
+				li = $('<p>Loading data, it may take some time</p>');
+				$('#container').append(li);
+
+
+			});
+
+			function createAll() {
+				
+				cnt = 0;
+				$.each(names, function(i, name) {
+					$.getJSON('http://'+addr+'/sensjson.php?termid='+modestr[i], function(data) {
+						cnt++;
+						seriesOptions[i] = {
+							name: name,
+							data: data,
+							tooltip: {
+								yDecimals: 1
+							}
+						};
+						if (cnt == 2) {
+						    createChart();
+						}
+					});
+				});
+			}
+
+
+</script>
+	</head>
+	<body>			
+		<script type="text/javascript" src="js/highstock.js"></script>
+		<script type="text/javascript" src="js/exporting.js"></script>
+
+    			<div id="accordion">
+				<h3><a href="#">Graph</a></h3>
+				<div>
+				<div id="container" style="height: 800px; min-width: 500px"></div>		
+				</div>
+    			</div>
+		<script>
+
+			$( "#accordion" ).addClass( "ui-accordion ui-widget ui-helper-reset" );
+			headers = $( "#accordion" ).find( "> li > :first-child,> :not(li):even" )
+				.addClass( "ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" );
+			
+			headers.next()
+				.addClass( "ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" );
+			headers.addClass( "ui-accordion-header-active ui-state-active" )
+				.toggleClass( "ui-corner-all ui-corner-top" );
+	</script>
+ 	</body>
+</html>

@@ -1,3 +1,4 @@
+
 <?php
 
 $rcn = mysql_connect("localhost","root",""); 
@@ -5,21 +6,21 @@ $rcn = mysql_connect("localhost","root","");
 mysql_select_db("bolejka"); 
 
 $termid = "";
-$last = "order by `measuredatetime`";
+$last = "order by `mesuredatetime`";
 $day = "";
 $from = "";
 $to = "";
 
 if (isset($_GET['termid'])) $termid=" and `sensorid` = ".$_GET['termid'];
-if (isset($_GET['last'])) $last="order by `measuredatetime` desc, 'termid' 
+if (isset($_GET['last'])) $last="order by `mesuredatetime` desc, 'termid' 
 limit ".$_GET['last'];
-if (isset($_GET['day'])) $day=" and DAY(`measuredatetime`) = ".$_GET['day'];
-if (isset($_GET['from'])) $from=" and `measuredatetime` >= ".$_GET['from'];
-if (isset($_GET['to'])) $to=" and `measurementdatetime` <= ".$_GET['to'];
+if (isset($_GET['day'])) $day=" and DAY(`mesuredatetime`) = ".$_GET['day'];
+if (isset($_GET['from'])) $from=" and `mesuredatetime` >= ".$_GET['from'];
+if (isset($_GET['to'])) $to=" and `mesurementdatetime` <= ".$_GET['to'];
 //printf("ZZ".$_POST['zz']);
 
-$sqlstr = "SELECT `measuredatetime`,ROUND(`value`,1) as value 
-FROM `temperatures` 
+$sqlstr = "SELECT unix_timestamp(`mesuredatetime`)*1000 as javadatetime, ROUND(`value`,1) as value 
+FROM `mesurements` 
 WHERE 1 ".$termid." ".$day."  ".$from."  ".$to." 
 ".$last;
 
@@ -27,8 +28,6 @@ $res = mysql_query($sqlstr);
 //limit 3");
 //WHERE `thermometerid` = 2
 //order by `measurementdatetime` desc
-
-
 
 $number = mysql_num_rows($res);
 printf("[");

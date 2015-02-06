@@ -7,14 +7,18 @@ import serial
 from time import sleep
 
 def getserial():
-  res = "0";
-  ser = serial.Serial(0, 9600)
+  res = ("0","0","0");
   try:
-    ser.open()
+    ser = serial.Serial(0, 9600)
+    #ser.open()
     if (ser.isOpen()):
       ser.write("a")
       sleep(0.1)
-      line = ser.readline()
+      ln1 = ser.readline()
+      ln2 = ser.readline()
+      ln3 = ser.readline()
+      res = (ln1,ln2,ln3);
+      
       ser.close()
 
   except:
@@ -36,11 +40,15 @@ def writetable(val):
 
   curdate = str(datetime.datetime.now())
 
-  r = requests.post("http://emoncms.org/input/post?json={power:"+str(val)+"}&apikey=7ac88045c3f843febe32d0d75d7b8a72")
+  r = requests.post("http://emoncms.org/input/post?json={power:"+str(val[0])+"}&apikey=7ac88045c3f843febe32d0d75d7b8a72")
+  r = requests.post("http://emoncms.org/input/post?json={power:"+str(val[1])+"}&apikey=7ac88045c3f843febe32d0d75d7b8a72")
+  r = requests.post("http://emoncms.org/input/post?json={power:"+str(val[2])+"}&apikey=7ac88045c3f843febe32d0d75d7b8a72")
 
   try:
     c.execute('USE bolejka;') 
-    c.execute('INSERT INTO mesurements (mesuredatetime, sensorid, value) VALUES ("'+curdate+'",1,'+str(val)+');')
+    c.execute('INSERT INTO mesurements (mesuredatetime, sensorid, value) VALUES ("'+curdate+'",1,'+str(val[0])+');')
+    c.execute('INSERT INTO mesurements (mesuredatetime, sensorid, value) VALUES ("'+curdate+'",2,'+str(val[1])+');')
+    c.execute('INSERT INTO mesurements (mesuredatetime, sensorid, value) VALUES ("'+curdate+'",3,'+str(val[2])+');')
     #c.execute('SELECT * FROM mesurements;')
     #print c.fetchall()
   

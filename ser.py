@@ -66,3 +66,5 @@ def writetable(val):
 if __name__ == "__main__":
   val = getserial() 
   writetable(val)
+
+

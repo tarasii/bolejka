@@ -10,15 +10,15 @@ def getserial():
   res = "0";
   ser = serial.Serial(0, 9600)
   try:
-    ser.open()
+    #ser.open()
     if (ser.isOpen()):
       ser.write("a")
       sleep(0.1)
       line = ser.readline()
       ser.close()
 
-  except:
-    print ("Error comm")
+  except Exception as e:
+    print "Error comm", e
 
   return res
 
@@ -26,7 +26,7 @@ def getserial():
 
 if __name__ == "__main__":
 
-  while (1=1):
+  while (1==1):
      val = getserial() 
      print val
      sleep(1)
